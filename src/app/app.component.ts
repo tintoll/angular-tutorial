@@ -1,6 +1,8 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { HeroDetailComponent } from './hero-detail.component';
 import { Hero } from './hero';
+import { HeroService } from './hero.service';
+
 
 @Component({
   selector: 'my-app',
@@ -64,38 +66,53 @@ import { Hero } from './hero';
     margin-right: .8em;
     border-radius: 4px 0 0 4px;
   }
-`]
+`],
+  providers : [HeroService]
 
 })
 
 
 
 
-export class AppComponent  { 
+export class AppComponent  implements OnInit{ 
   title = 'Tour of Heros';
   hero : Hero = {
     id : 1,
     name : 'Wind'
   };
-  heroes = HEROES;
+  heroes : Hero[];
   selectedHero : Hero;
   onSelect(hero:Hero) : void {
     this.selectedHero = hero;
   }
+
+  getHeroes() : void {
+    //콜백함수를 promise의 then 메서드를 통해서 넘기겠습니다.
+    /*
+    Promise와 arrow function(=>)은 ES2015 문법입니다.
+
+    Promise는 설명한 바와 같이 동기화를 위해 사용되고 arrow function은 기존에 비해 
+    함수 선언을 간결하게 만들어주고  this를 더 우아하게 사용할 수 있습니다
+
+    */
+    this.heroService.getHeroes().then(heroes => this.heroes = heroes);
+    
+  }
+  /*
+  생성자 그 자체는 아무것도 안하지만 패러미터는 private heroService 
+  프로퍼티를 정의하면서 동시에 HeroService 주입대상으로 인지합니다.
+  */
+  constructor(private heroService : HeroService){
+
+  }  
+
+  //OnInit을 impl할때 구현해야되는 메서드
+  ngOnInit() : void{
+    this.getHeroes();
+  }
 }
 
-const HEROES : Hero[] = [
-  { id: 11, name: 'Mr. Nice' },
-  { id: 12, name: 'Narco' },
-  { id: 13, name: 'Bombasto' },
-  { id: 14, name: 'Celeritas' },
-  { id: 15, name: 'Magneta' },
-  { id: 16, name: 'RubberMan' },
-  { id: 17, name: 'Dynama' },
-  { id: 18, name: 'Dr IQ' },
-  { id: 19, name: 'Magma' },
-  { id: 20, name: 'Tornado' }
-];
+
 
 
 
