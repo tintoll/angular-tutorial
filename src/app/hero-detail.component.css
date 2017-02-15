@@ -1,0 +1,29 @@
+label {
+2.  display: inline-block;
+3.  width: 3em;
+4.  margin: .5em 0;
+5.  color: #607D8B;
+6.  font-weight: bold;
+7.}
+8.input {
+9.  height: 2em;
+10.  font-size: 1em;
+11.  padding-left: .4em;
+12.}
+13.button {
+14.  margin-top: 20px;
+15.  font-family: Arial;
+16.  background-color: #eee;
+17.  border: none;
+18.  padding: 5px 10px;
+19.  border-radius: 4px;
+20.  cursor: pointer; cursor: hand;
+21.}
+22.button:hover {
+23.  background-color: #cfd8dc;
+24.}
+25.button:disabled {
+26.  background-color: #eee;
+27.  color: #ccc; 
+28.  cursor: auto;
+29.}

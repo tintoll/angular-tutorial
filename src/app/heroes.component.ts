@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import { HeroDetailComponent } from './hero-detail.component';
 import { Hero } from './hero';
 import { HeroService } from './hero.service';
+import { Router} from '@angular/router';
 
 @Component({
   selector: 'my-heroes',
@@ -14,7 +15,12 @@ import { HeroService } from './hero.service';
         <span class="badge">{{hero.id}}</span> {{hero.name}}
       </li>
     </ul>
-    <my-hero-detail [hero]="selectedHero"></my-hero-detail>    
+    <div *ngIf="selectedHero">
+        <h2>
+            {{selectedHero.name | uppercase}} is my hero
+        </h2>
+        <button (click)="gotoDetail()">View Details</button>
+    </div>   
   `,
   styles: [`
   .selected {
@@ -94,13 +100,16 @@ export class HeroesComponent implements OnInit {
     생성자 그 자체는 아무것도 안하지만 패러미터는 private heroService 
     프로퍼티를 정의하면서 동시에 HeroService 주입대상으로 인지합니다.
     */
-    constructor(private heroService : HeroService){
+    constructor(private router : Router,private heroService : HeroService){
 
     }  
 
     //OnInit을 impl할때 구현해야되는 메서드
     ngOnInit() : void{
         this.getHeroes();
+    }
+    gotoDetail(): void {
+        this.router.navigate(['/detail', this.selectedHero.id]);
     }
 }
 

@@ -5,11 +5,42 @@ import { Component, OnInit } from '@angular/core';
   template : `
     <h1>{{title}}</h1>
     <nav>
-     <a routerLink="/dashboard">Dashboard</a>
-     <a routerLink="/heroes">Heroes</a>
+     <a routerLink="/dashboard" routerLinkActive="active">Dashboard</a>
+     <a routerLink="/heroes" routerLinkActive="active">Heroes</a>
     </nav>
     <router-outlet></router-outlet>   
-  `
+  `,
+  styles: [`
+  h1 {
+    font-size: 1.2em;
+    color: #999;
+    margin-bottom: 0;
+  }
+  h2 {
+    font-size: 2em;
+    margin-top: 0;
+    padding-top: 0;
+  }
+  nav a {
+    padding: 5px 10px;
+    text-decoration: none;
+    margin-top: 10px;
+    display: inline-block;
+    background-color: #eee;
+    border-radius: 4px;
+  }
+  nav a:visited, a:link {
+    color: #607D8B;
+  }
+  nav a:hover {
+    color: #039be5;
+    background-color: #CFD8DC;
+  }
+  nav a.active {
+    color: #039be5;
+  }
+  
+  `],
 })
 /*
   방금 우리는 RouterLink 지시자2에 문자열을 바인딩시켰고 이 문자열(‘/heroes’)을 
